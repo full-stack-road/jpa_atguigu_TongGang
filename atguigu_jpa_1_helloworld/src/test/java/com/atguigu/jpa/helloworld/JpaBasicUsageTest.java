@@ -15,25 +15,25 @@ import javax.persistence.Persistence;
 public class JpaBasicUsageTest {
 
     public static void main(String[] args) {
-        //1. ´´½¨ EntityManagerFactory
+        //1. åˆ›å»º EntityManagerFactory
         String persistenceUnitName = "jpa-1";
         Map<String, Object> properties = new HashMap<>(1);
         properties.put("hibernate.show_sql", true);
 
         /**
-         * »¹ÓĞÒ»¸ö²»ĞèÒªMapÖ»ĞèÒªpersistenceUnitNameµÄ·½·¨
+         * è¿˜æœ‰ä¸€ä¸ªä¸éœ€è¦Mapåªéœ€è¦persistenceUnitNameçš„æ–¹æ³•
          */
         EntityManagerFactory entityManagerFactory =
                 Persistence.createEntityManagerFactory(persistenceUnitName, properties);
 
-        //2. ´´½¨ EntityManager. ÀàËÆÓÚ Hibernate µÄ SessionFactory
+        //2. åˆ›å»º EntityManager. ç±»ä¼¼äº Hibernate çš„ SessionFactory
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        //3. ¿ªÆôÊÂÎñ
+        //3. å¼€å¯äº‹åŠ¡
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
 
-        //4. ½øĞĞ³Ö¾Ã»¯²Ù×÷
+        //4. è¿›è¡ŒæŒä¹…åŒ–æ“ä½œ
         Customer customer = new Customer();
         customer.setAge(12);
         customer.setEmail("tom@atguigu.com");
@@ -43,13 +43,13 @@ public class JpaBasicUsageTest {
 
         entityManager.persist(customer);
 
-        //5. Ìá½»ÊÂÎñ
+        //5. æäº¤äº‹åŠ¡
         entityTransaction.commit();
 
-        //6. ¹Ø±Õ EntityManager
+        //6. å…³é—­ EntityManager
         entityManager.close();
 
-        //7. ¹Ø±Õ EntityManagerFactory
+        //7. å…³é—­ EntityManagerFactory
         entityManagerFactory.close();
     }
 

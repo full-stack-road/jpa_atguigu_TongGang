@@ -36,8 +36,8 @@ public class EntityManagerMainMethodTest {
     }
 
     /**
-     * ÀàËÆÓÚ hibernate ÖĞ Session µÄ get ·½·¨.
-     * Ö±½ÓÓÃSql²éÑ¯Êı¾İ¿â£¬µÃµ½½á¹û£¬Ã»ÓĞ´úÀí
+     * ç±»ä¼¼äº hibernate ä¸­ Session çš„ get æ–¹æ³•.
+     * ç›´æ¥ç”¨SqlæŸ¥è¯¢æ•°æ®åº“ï¼Œå¾—åˆ°ç»“æœï¼Œæ²¡æœ‰ä»£ç†
      */
     @Test
     public void testFind() {
@@ -49,9 +49,9 @@ public class EntityManagerMainMethodTest {
     }
 
     /**
-     * ÀàËÆÓÚ hibernate ÖĞ Session µÄ load ·½·¨
-     * ²»»áÖ±½Ó²éÑ¯Êı¾İ¿â£¬¶øÊÇÊ¹ÓÃÒ»¸ö´úÀí¶ÔÏó¡£µ±ÕæÕı·ÃÎÊ¶ÔÏóÊ±²ÅÈ¥Êı¾İ¿â²éÑ¯
-     * ÓÃÁË´úÀí¶ÔÏó£¬ÔòÈç¹ûÓĞ²»ºÏÀíµÄ×´Ì¬£¬ÄÇÃ´»áÅ×³öÒì³£
+     * ç±»ä¼¼äº hibernate ä¸­ Session çš„ load æ–¹æ³•
+     * ä¸ä¼šç›´æ¥æŸ¥è¯¢æ•°æ®åº“ï¼Œè€Œæ˜¯ä½¿ç”¨ä¸€ä¸ªä»£ç†å¯¹è±¡ã€‚å½“çœŸæ­£è®¿é—®å¯¹è±¡æ—¶æ‰å»æ•°æ®åº“æŸ¥è¯¢
+     * ç”¨äº†ä»£ç†å¯¹è±¡ï¼Œåˆ™å¦‚æœæœ‰ä¸åˆç†çš„çŠ¶æ€ï¼Œé‚£ä¹ˆä¼šæŠ›å‡ºå¼‚å¸¸
      */
     @Test
     public void testGetReference() {
@@ -59,15 +59,15 @@ public class EntityManagerMainMethodTest {
         System.out.println("-------------------------------------");
         System.out.println(customer.getClass().getName());
         System.out.println("-------------------------------------");
-        //¹Ø±ÕÁËentityManagerÔÙÊ¹ÓÃ¶ÔÏó£¬»á±¨Òì³££¬£¬ÒòÎªÊ¹ÓÃÁË´úÀí£¬ÑÓ³Ù¼ÓÔØ
+        //å…³é—­äº†entityManagerå†ä½¿ç”¨å¯¹è±¡ï¼Œä¼šæŠ¥å¼‚å¸¸ï¼Œï¼Œå› ä¸ºä½¿ç”¨äº†ä»£ç†ï¼Œå»¶è¿ŸåŠ è½½
         //entityTransaction.commit();
         //entityManager.close();
         System.out.println(customer);
     }
 
     /**
-     * ÀàËÆÓÚ hibernate µÄ save ·½·¨. Ê¹¶ÔÏóÓÉÁÙÊ±×´Ì¬±äÎª³Ö¾Ã»¯×´Ì¬.
-     * ºÍ hibernate µÄ save ·½·¨µÄ²»Í¬Ö®´¦: Èô¶ÔÏóÓĞ id, Ôò²»ÄÜÖ´ĞĞ insert ²Ù×÷, ¶ø»áÅ×³öÒì³£.
+     * ç±»ä¼¼äº hibernate çš„ save æ–¹æ³•. ä½¿å¯¹è±¡ç”±ä¸´æ—¶çŠ¶æ€å˜ä¸ºæŒä¹…åŒ–çŠ¶æ€.
+     * å’Œ hibernate çš„ save æ–¹æ³•çš„ä¸åŒä¹‹å¤„: è‹¥å¯¹è±¡æœ‰ id, åˆ™ä¸èƒ½æ‰§è¡Œ insert æ“ä½œ, è€Œä¼šæŠ›å‡ºå¼‚å¸¸.
      */
     @Test
     public void testPersistence() {
@@ -77,7 +77,7 @@ public class EntityManagerMainMethodTest {
         customer.setCreatedTime(new Date());
         customer.setEmail("bb@163.com");
         customer.setLastName("BB");
-        //È¡ÏûÏÂÃæÓï¾äµÄ×¢ÊÍ£¬¾Í»á±¨´í
+        //å–æ¶ˆä¸‹é¢è¯­å¥çš„æ³¨é‡Šï¼Œå°±ä¼šæŠ¥é”™
         //customer.setId(100);
 
         entityManager.persist(customer);
@@ -86,14 +86,14 @@ public class EntityManagerMainMethodTest {
     }
 
     /**
-     * ÀàËÆÓÚ hibernate ÖĞ Session µÄ delete ·½·¨. °Ñ¶ÔÏó¶ÔÓ¦µÄ¼ÇÂ¼´ÓÊı¾İ¿âÖĞÒÆ³ı
-     * µ«×¢Òâ: ¸Ã·½·¨Ö»ÄÜÒÆ³ı ³Ö¾Ã»¯ ¶ÔÏó. ¶ø hibernate µÄ delete ·½·¨Êµ¼ÊÉÏ»¹¿ÉÒÔÒÆ³ı ÓÎÀë¶ÔÏó.
+     * ç±»ä¼¼äº hibernate ä¸­ Session çš„ delete æ–¹æ³•. æŠŠå¯¹è±¡å¯¹åº”çš„è®°å½•ä»æ•°æ®åº“ä¸­ç§»é™¤
+     * ä½†æ³¨æ„: è¯¥æ–¹æ³•åªèƒ½ç§»é™¤ æŒä¹…åŒ– å¯¹è±¡. è€Œ hibernate çš„ delete æ–¹æ³•å®é™…ä¸Šè¿˜å¯ä»¥ç§»é™¤ æ¸¸ç¦»å¯¹è±¡.
      */
     @Test
     public void testRemove(){
-        //ÕâÑùµÄÓÎÀë¶ÔÏó£¬²»ÄÜ±»É¾³ı£¬»á±¨´í
-		//Customer customer = new Customer();
-		//customer.setId(3);
+        //è¿™æ ·çš„æ¸¸ç¦»å¯¹è±¡ï¼Œä¸èƒ½è¢«åˆ é™¤ï¼Œä¼šæŠ¥é”™
+        //Customer customer = new Customer();
+        //customer.setId(3);
 
         Customer customer = entityManager.find(Customer.class, 2);
 
