@@ -40,7 +40,8 @@ public class EntityManagerMergeMethodTest {
      * 若传入的是一个临时对象，则步骤如下：
      * 1. 创建一个新的对象
      * 2. 把临时对象的属性复制到新的对象中
-     * 3. 对新的对象执行 Insert 操作.
+     * 3. 为新的对象分配Id
+     * 4. 对新的对象执行 Insert 操作.
      * 所以新的对象中有 id, 但以前的临时对象中没有 id. 同时，整个流程中不会有 Select 语句产生
      */
     @Test
@@ -63,7 +64,8 @@ public class EntityManagerMergeMethodTest {
      * 1. 若在 EntityManager 缓存中没有该对象
      * 2. 若在数据库中也没有对应的记录（会有 Select 语句产生）
      * 3. JPA 会创建一个新的对象, 然后把当前游离对象的属性复制到新创建的对象中
-     * 4. 对新创建的对象执行 insert 操作.
+     * 4. 为新的对象分配Id
+     * 5. 对新创建的对象执行 insert 操作.
      */
     @Test
     public void testMerge2() {
@@ -74,7 +76,7 @@ public class EntityManagerMergeMethodTest {
         customer.setEmail("dd@163.com");
         customer.setLastName("DD");
         //设置ID，这个ID不会被复制到新的对象中。新的对象会重新产生一个新的ID。
-        customer.setId(100);
+        customer.setId(111111);
 
         Customer customer2 = entityManager.merge(customer);
 
@@ -114,22 +116,22 @@ public class EntityManagerMergeMethodTest {
      */
     @Test
     public void testMerge4() {
-        Customer customer = new Customer();
-        customer.setAge(28);
-        customer.setBirth(new Date());
-        customer.setCreatedTime(new Date());
-        customer.setEmail("ff@163.com");
-        customer.setLastName("FF");
-
-        customer.setId(1);
+        final int id = 4;
+        Customer customer = entityManager.find(Customer.class, id);
+        //notice: birth=2017-11-16
         System.out.println("customer: " + customer);
 
-        Customer customer2 = entityManager.find(Customer.class, 1);
-        //notice: birth=2017-11-16
-        System.out.println("customer2: " + customer2);
+        Customer newCustomer = new Customer();
+        newCustomer.setAge(28);
+        newCustomer.setBirth(new Date());
+        newCustomer.setCreatedTime(new Date());
+        newCustomer.setEmail("ff@163.com");
+        newCustomer.setLastName("FF");
+        newCustomer.setId(id);
+        System.out.println("newCustomer: " + newCustomer);
 
-        Customer customer3 = entityManager.merge(customer);
+        Customer customer1 = entityManager.merge(newCustomer);
         //notice: birth=Thu Nov 16 10:50:36 CST 2017 应该是内存对象复制，所以是这样子的
-        System.out.println("customer3: " + customer3);
+        System.out.println("customer1: " + customer1);
     }
 }
